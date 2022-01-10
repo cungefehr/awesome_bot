@@ -18,14 +18,15 @@ var auth = require('./auth.json');
 // });
 // logger.level = 'debug';
 // Initialize Discord Bot
+
 var bot = new Discord.Client({
    token: auth.token,
    autorun: true
 });
 bot.on('ready', function (evt) {
-    logger.info('Connected');
-    logger.info('Logged in as: ');
-    logger.info(bot.username + ' - (' + bot.id + ')');
+    // logger.info('Connected');
+    // logger.info('Logged in as: ');
+    // logger.info(bot.username + ' - (' + bot.id + ')');
 });
 bot.on('message', function (user, userID, channelID, message, evt) {
     var serverID = bot.channels[channelID].guild_id;
@@ -38,7 +39,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         var cmd = args[0];
         var cmd_option = args[1];
 
-        logger.info(message);
+        // logger.info(message);
         args = args.splice(1);
         switch(cmd) {
             // !ping
