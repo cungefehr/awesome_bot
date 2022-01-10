@@ -1,6 +1,6 @@
 var Discord = require('discord.io');
 //var shell = require('shelljs');
-var logger = require('winston');
+//var logger = require('winston');
 var auth = require('./auth.json');
 //var mysql = require('mysql');
 
@@ -12,11 +12,11 @@ var auth = require('./auth.json');
 // });
 
 // Configure logger settings
-logger.remove(logger.transports.Console);
-logger.add(logger.transports.Console, {
-    colorize: true
-});
-logger.level = 'debug';
+// logger.remove(logger.transports.Console);
+// logger.add(logger.transports.Console, {
+//     colorize: true
+// });
+// logger.level = 'debug';
 // Initialize Discord Bot
 var bot = new Discord.Client({
    token: auth.token,
@@ -232,7 +232,7 @@ function getServerInfo(cmd_option, channelID) {
        //con.connect(function(err) {
        // if (err) throw err;
         console.log("Connected!");
-            con.query("SELECT * FROM serverinfo WHERE name='" + cmd_option +"'", function (err, result, fields, serverinfo) {
+            // con.query("SELECT * FROM serverinfo WHERE name='" + cmd_option +"'", function (err, result, fields, serverinfo) {
               if (err) throw err;
               //console.log(result);
               var serverinfo_rows = [ 'Servername: ' , 'Spielname: ' , 'Mods: ' , 'Maximale Spieleranzahl: ' , 'FQDN: ' , 'IP Adresse: ' , 'Port: ' , 'Server User: ' , 'Server User Password: '];
