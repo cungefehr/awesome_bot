@@ -252,7 +252,7 @@ function getServerInfo(cmd_option, channelID) {
           //    bot.sendMessage({to: channelID, message: "Server User: " + result[0].serveruser });
           //    bot.sendMessage({to: channelID, message: "Server User Password: " + result[0].serveruserpassword });
 
-            });
+            // });
 
       //});
 
