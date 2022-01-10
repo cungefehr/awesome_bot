@@ -1,15 +1,15 @@
 var Discord = require('discord.io');
-var shell = require('shelljs');
+//var shell = require('shelljs');
 var logger = require('winston');
 var auth = require('./auth.json');
-var mysql = require('mysql');
+//var mysql = require('mysql');
 
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "cungefehr",
-  database: "discord_bot",
-  password: "cZw90c7W$"
-});
+// var con = mysql.createConnection({
+//   host: "localhost",
+//   user: "cungefehr",
+//   database: "discord_bot",
+//   password: "cZw90c7W$"
+// });
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -57,7 +57,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 
                     if ( check == 1 ) {
                       console.log(user + " - " + userID);
-                      shcmd = shell.exec('starbound.sh start');
+                      // shcmd = shell.exec('starbound.sh start');
                     } else {
                       console.log(user + " - " + userID + " Rolecheck failed!");
                       bot.sendMessage({to: channelID, message: "Rolecheck failed for User: " + user });
@@ -68,7 +68,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     check = roleCheck(user, userID, channelID, evt, "Admin");
                     if ( check == 1 ) {
                       console.log(user + " - " + userID);
-                      shcmd = shell.exec('starbound.sh stop');
+                      // shcmd = shell.exec('starbound.sh stop');
                       bot.sendMessage({to: channelID, message: " " + shcmd });
                     } else {
                       console.log(user + " - " + userID + " Rolecheck failed!");
@@ -80,7 +80,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     check = roleCheck(user, userID, channelID, evt, "Admin");
                     if ( check == 1 ) {
                       console.log(user + " - " + userID);
-                      shcmd = shell.exec('starbound.sh restart');
+                      // shcmd = shell.exec('starbound.sh restart');
                       bot.sendMessage({to: channelID, message: " " + shcmd });
                     } else {
                       console.log(user + " - " + userID + " Rolecheck failed!");
@@ -92,7 +92,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     check = roleCheck(user, userID, channelID, evt, "Admin");
                     if ( check == 1 ) {
                       console.log(user + " - " + userID);
-                      shcmd = shell.exec('starbound.sh update');
+                      // shcmd = shell.exec('starbound.sh update');
                       bot.sendMessage({to: channelID, message: " " + shcmd });
                   } else {
                     console.log(user + " - " + userID + " Rolecheck failed!");
@@ -102,7 +102,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 
             case 'starboundstatus':
                     console.log(user + " - " + userID);
-		                shcmd = shell.exec('starbound.sh status');
+		                // shcmd = shell.exec('starbound.sh status');
                     bot.sendMessage({to: channelID, message: " " + shcmd });
 		    //shell.echo('Test erfolgreich');
 	          break;
@@ -111,7 +111,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     // check = roleCheck(user, userID, channelID, evt, "AWE");
                     // if ( check == 1 ) {
                     //   console.log(user + " - " + userID);
-                      shcmd = shell.exec('systemctl start valheim');
+                      // shcmd = shell.exec('systemctl start valheim');
                       bot.sendMessage({to: channelID, message: " " + shcmd });
                   // } else {
                   //     console.log(user + " - " + userID + " Rolecheck failed!");
@@ -123,7 +123,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     check = roleCheck(user, userID, channelID, evt, "AWE");
                     if ( check == 1 ) {
                       console.log(user + " - " + userID);
-                      shcmd = shell.exec('systemctl stop valheim');
+                      // shcmd = shell.exec('systemctl stop valheim');
                       bot.sendMessage({to: channelID, message: " " + shcmd });
                   } else {
                       console.log(user + " - " + userID + " Rolecheck failed!");
@@ -133,7 +133,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 
             case 'valheim-status':
                     console.log(user + " - " + userID);
-                    shcmd = shell.exec('systemctl status valheim');
+                    // shcmd = shell.exec('systemctl status valheim');
                     bot.sendMessage({to: channelID, message: " " + shcmd });
                     //shell.echo('Test erfolgreich');
             break;
