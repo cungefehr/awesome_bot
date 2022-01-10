@@ -1,6 +1,6 @@
 var Discord = require('discord.io');
 //var shell = require('shelljs');
-//var logger = require('winston');
+var logger = require('winston');
 var auth = require('./auth.json');
 //var mysql = require('mysql');
 
@@ -12,11 +12,11 @@ var auth = require('./auth.json');
 // });
 
 // Configure logger settings
-// logger.remove(logger.transports.Console);
-// logger.add(logger.transports.Console, {
-//     colorize: true
-// });
-// logger.level = 'debug';
+ logger.remove(logger.transports.Console);
+ logger.add(logger.transports.Console, {
+     colorize: true
+ });
+ logger.level = 'debug';
 // Initialize Discord Bot
 
 var bot = new Discord.Client({
@@ -24,9 +24,9 @@ var bot = new Discord.Client({
    autorun: true
 });
 bot.on('ready', function (evt) {
-    // logger.info('Connected');
-    // logger.info('Logged in as: ');
-    // logger.info(bot.username + ' - (' + bot.id + ')');
+     logger.info('Connected');
+     logger.info('Logged in as: ');
+     logger.info(bot.username + ' - (' + bot.id + ')');
 });
 bot.on('message', function (user, userID, channelID, message, evt) {
     var serverID = bot.channels[channelID].guild_id;
@@ -39,7 +39,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         var cmd = args[0];
         var cmd_option = args[1];
 
-        // logger.info(message);
+        logger.info(message);
         args = args.splice(1);
         switch(cmd) {
             // !ping
@@ -253,7 +253,7 @@ function getServerInfo(cmd_option, channelID) {
           //    bot.sendMessage({to: channelID, message: "Server User: " + result[0].serveruser });
           //    bot.sendMessage({to: channelID, message: "Server User Password: " + result[0].serveruserpassword });
 
-            // });
+            });
 
       //});
 
