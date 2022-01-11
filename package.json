@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "discord.js": "^13.5.1",
+    "dotenv": "^11.0.0",
+    "mysql": "^2.18.1",
+    "shelljs": "^0.8.5"
+  },
+  "name": "awesome_bot",
+  "description": "",
+  "version": "1.0.0",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cungefehr/awesome_bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cungefehr/awesome_bot/issues"
+  },
+  "homepage": "https://github.com/cungefehr/awesome_bot#readme"
+}
