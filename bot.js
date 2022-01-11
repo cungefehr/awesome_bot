@@ -1,6 +1,6 @@
 var Discord = require('discord.io');
 //var shell = require('shelljs');
-const logger = require ('logger.js');
+const logger = require ('./logger.js');
 var auth = require('./auth.json');
 //var mysql = require('mysql');
 
