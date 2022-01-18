@@ -194,7 +194,9 @@ client.on('message', function (messages){
                         if ( check == 1 ) {
                           console.log(messages.author.username + " - " + messages.author.id);
                           shcmd = shell.exec('systemctl status zomboid');
-                          messages.reply(' ' + shcmd );
+                          shcmd = shcmd.splt(/\n\n/);
+                          console.log(shcmd);
+                          //messages.reply(' ' + shcmd );
                         } else {
                           console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
                           messages.reply('Rolecheck failed for User: ' + messages.author.username );
