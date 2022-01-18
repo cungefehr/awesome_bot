@@ -193,7 +193,7 @@ client.on('message', function (messages){
                         check = roleCheck(messages,"AWE");
                         if ( check == 1 ) {
                           console.log(messages.author.username + " - " + messages.author.id);
-                          shcmd = shell.exec('systemctl restart zomboid');
+                          shcmd = shell.exec('systemctl status zomboid');
                           messages.reply(' ' + shcmd );
                         } else {
                           console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
