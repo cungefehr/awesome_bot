@@ -236,12 +236,12 @@ client.on('message', function (messages){
                 case 'clearChat':
                     check = roleCheck(messages,"AWE");
                     if ( check == 1 ) {
-                      message.channel.bulkDelete(cmd_option, true)
-                          .then((_message) => {
-                            message.channel
+                      messages.channel.bulkDelete(cmd_option, true)
+                          .then((_messages) => {
+                            messages.channel
                               // do you want to include the current message here?
                               // if not it should be ${_message.size - 1}
-                              .send(`Bot cleared \`${_message.size}\` messages :broom:`)
+                              .send(`Bot cleared \`${_messages.size}\` messages :broom:`)
                               .then((sent) => {
                                 setTimeout(() => {
                                   sent.delete();
