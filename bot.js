@@ -159,8 +159,8 @@ client.on('message', function (messages){
                   check = roleCheck(messages,"AWE");
                   if ( check == 1 ) {
                     console.log(messages.author.username + " - " + messages.author.id);
-                    shcmd = shell.exec('systemctl start zomboid');
-                    messages.reply(' ' + shcmd );
+                    //shcmd = shell.exec('systemctl start zomboid');
+                    messages.reply('Server started!');
                   } else {
                     console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
                     messages.reply('Rolecheck failed for User: ' + messages.author.username );
@@ -171,8 +171,8 @@ client.on('message', function (messages){
                   check = roleCheck(messages,"AWE");
                   if ( check == 1 ) {
                     console.log(messages.author.username + " - " + messages.author.id);
-                    shcmd = shell.exec('systemctl stop zomboid');
-                    messages.reply(' ' + shcmd );
+                    //shcmd = shell.exec('systemctl stop zomboid');
+                    messages.reply('Server stopped!');
                   } else {
                     console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
                     messages.reply('Rolecheck failed for User: ' + messages.author.username );
@@ -182,8 +182,8 @@ client.on('message', function (messages){
                         check = roleCheck(messages,"AWE");
                         if ( check == 1 ) {
                           console.log(messages.author.username + " - " + messages.author.id);
-                          shcmd = shell.exec('systemctl restart zomboid');
-                          messages.reply(' ' + shcmd );
+                          //shcmd = shell.exec('systemctl restart zomboid');
+                          messages.reply('Server restarted!');
                         } else {
                           console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
                           messages.reply('Rolecheck failed for User: ' + messages.author.username );
@@ -192,12 +192,13 @@ client.on('message', function (messages){
                 case 'zomboidstatus':
                         check = roleCheck(messages,"AWE");
                         if ( check == 1 ) {
-                          console.log(messages.author.username + " - " + messages.author.id);
-                          shcmd = shell.exec('systemctl status zomboid');
-                          shcmd = shcmd.split(/\n\n/);
-                          messages.reply(' ' + shcmd[0] );
-                          messages.reply(' ' + shcmd[1] );
-
+                          systemctl('status','zomboid');
+                          if ( shcmd == '' ) {
+                            //
+                            messages.reply('Keine Rückantwort.');
+                          } else {
+                            messages.reply(' ' + shcmd );
+                          }
                         } else {
                           console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
                           messages.reply('Rolecheck failed for User: ' + messages.author.username );
@@ -271,6 +272,17 @@ client.on('message', function (messages){
 		  } else {
 			     return 0;
       }
+}
+
+function systemctl(cmd,service) {
+  console.log(messages.author.username + " - " + messages.author.id);
+  shcmd = shell.exec('systemctl ' +cmd +service );
+
+  if ( cmd == 'status' ) {
+    shcmd = shcmd.split(/\n\n/);
+    shcmd = shcmd[0];
+  }
+  return shcmd;
 }
 
 //  function getServerInfo(cmd_option) {
