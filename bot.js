@@ -67,13 +67,13 @@ client.on('message', function (messages){
                         messages.reply('Hi!' + ' '  + messages.author.username);
     	          break;
 
-                //Starbound
+                //BEGIN
                 case 'starboundstart':
                         console.log(messages);
                         check = roleCheck(messages,"AWE");
                         if ( check == 1 ) {
                           console.log(messages.author.username + " - " + messages.author.id);
-                          // shcmd = shell.exec('starbound.sh start');
+                          shcmd = shell.exec('starbound.sh start');
                         } else {
                           console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
                           messages.reply('Rolecheck failed for User: ' + messages.author.username );
@@ -84,7 +84,7 @@ client.on('message', function (messages){
                         check = roleCheck(messages,"AWE");
                         if ( check == 1 ) {
                           console.log(messages.author.username + " - " + messages.author.id);
-                          // shcmd = shell.exec('starbound.sh stop');
+                          shcmd = shell.exec('starbound.sh stop');
                           messages.reply('' + shcmd);
                         } else {
                           console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
@@ -96,7 +96,7 @@ client.on('message', function (messages){
                         check = roleCheck(messages,"AWE");
                         if ( check == 1 ) {
                           console.log(messages.author.username + " - " + messages.author.id);
-                          // shcmd = shell.exec('starbound.sh restart');
+                          shcmd = shell.exec('starbound.sh restart');
                           messages.reply(' ' + shcmd );
                         } else {
                           console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
@@ -108,7 +108,7 @@ client.on('message', function (messages){
                         check = roleCheck(messages,"AWE");
                         if ( check == 1 ) {
                           console.log(messages.author.username + " - " + messages.author.id);
-                          // shcmd = shell.exec('starbound.sh update');
+                          shcmd = shell.exec('starbound.sh update');
                           messages.reply(' ' + shcmd );
                       } else {
                         console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
@@ -118,29 +118,39 @@ client.on('message', function (messages){
 
                 case 'starboundstatus':
                         console.log(messages.author.username + " - " + messages.author.id);
-    		                // shcmd = shell.exec('starbound.sh status');
+    		                shcmd = shell.exec('starbound.sh status');
                         messages.reply('' + shcmd );
-    		    //shell.echo('Test erfolgreich');
     	          break;
-
+                //END
                 case 'valheim-start':
-                        // check = roleCheck(messages.author.username, messages.author.id, channelID, evt, "AWE");
-                        // if ( check == 1 ) {
-                        //   console.log(messages.author.username + " - " + messages.author.id);
-                          // shcmd = shell.exec('systemctl start valheim');
-                          messages.reply('' + shcmd );
-                      // } else {
-                      //     console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
-                      //     messages.reply('Rolecheck failed for User: " + messages.author.username });
-                      // }
+                        check = roleCheck(messages.author.username, messages.author.id, channelID, evt, "AWE");
+                        if ( check == 1 ) {
+                          console.log(messages.author.username + " - " + messages.author.id);
+                          systemctl('start','valheim');
+
+                          if ( shcmd == '' ) {
+                            messages.reply('Server started!');
+                          } else {
+                            messages.reply(' ' + shcmd );
+                          }
+                      } else {
+                          console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
+                          messages.reply('Rolecheck failed for User: " + messages.author.username });
+                      }
                 break;
 
                 case 'valheim-stop':
                         check = roleCheck(messages,"AWE");
                         if ( check == 1 ) {
                           console.log(messages.author.username + " - " + messages.author.id);
-                          // shcmd = shell.exec('systemctl stop valheim');
-                          messages.reply('' + shcmd );
+
+                          systemctl('stop','valheim');
+
+                          if ( shcmd == '' ) {
+                            messages.reply('Server stopped!');
+                          } else {
+                            messages.reply(' ' + shcmd );
+                          }
                       } else {
                           console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
                           messages.reply('Rolecheck failed for User:' + messages.author.username );
@@ -149,9 +159,13 @@ client.on('message', function (messages){
 
                 case 'valheim-status':
                         console.log(messages.author.username + " - " + messages.author.id);
-                        // shcmd = shell.exec('systemctl status valheim');
-                        messages.reply(' ' + shcmd );
-                        //shell.echo('Test erfolgreich');
+                        systemctl('status','valheim');
+
+                        if ( shcmd == '' ) {
+                          messages.reply('Keine Antwort!');
+                        } else {
+                          messages.reply(' ' + shcmd );
+                        }
                 break;
 
                 //Starbound
@@ -159,8 +173,14 @@ client.on('message', function (messages){
                   check = roleCheck(messages,"AWE");
                   if ( check == 1 ) {
                     console.log(messages.author.username + " - " + messages.author.id);
-                    //shcmd = shell.exec('systemctl start zomboid');
-                    messages.reply('Server started!');
+                    systemctl('start','zomboid');
+
+                    if ( shcmd == '' ) {
+                      messages.reply('Server started!');
+                    } else {
+                      messages.reply(' ' + shcmd );
+                    }
+
                   } else {
                     console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
                     messages.reply('Rolecheck failed for User: ' + messages.author.username );
@@ -171,8 +191,14 @@ client.on('message', function (messages){
                   check = roleCheck(messages,"AWE");
                   if ( check == 1 ) {
                     console.log(messages.author.username + " - " + messages.author.id);
-                    //shcmd = shell.exec('systemctl stop zomboid');
-                    messages.reply('Server stopped!');
+                    systemctl('stop','zomboid');
+
+                    if ( shcmd == '' ) {
+                      messages.reply('Server stopped!');
+                    } else {
+                      messages.reply(' ' + shcmd );
+                    }
+
                   } else {
                     console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
                     messages.reply('Rolecheck failed for User: ' + messages.author.username );
@@ -182,16 +208,21 @@ client.on('message', function (messages){
                         check = roleCheck(messages,"AWE");
                         if ( check == 1 ) {
                           console.log(messages.author.username + " - " + messages.author.id);
-                          //shcmd = shell.exec('systemctl restart zomboid');
-                          messages.reply('Server restarted!');
+                          systemctl('restart','zomboid');
+
+                          if ( shcmd == '' ) {
+                            //
+                            messages.reply('Server restarted!');
+                          } else {
+                            messages.reply(' ' + shcmd );
+                          }
+
                         } else {
                           console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
                           messages.reply('Rolecheck failed for User: ' + messages.author.username );
                         }
                 break;
                 case 'zomboidstatus':
-                        check = roleCheck(messages,"AWE");
-                        if ( check == 1 ) {
                           console.log(messages.author.username + " - " + messages.author.id);
                           systemctl('status','zomboid');
                           if ( shcmd == '' ) {
@@ -200,10 +231,6 @@ client.on('message', function (messages){
                           } else {
                             messages.reply(' ' + shcmd );
                           }
-                        } else {
-                          console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
-                          messages.reply('Rolecheck failed for User: ' + messages.author.username );
-                        }
                 break;
 
                 case 'clearChat':
