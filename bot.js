@@ -234,7 +234,7 @@ client.on('message', function (messages){
                 break;
 
                 case 'clearChat':
-                    roleCheck(messages,"AWE");
+                    check = roleCheck(messages,"AWE");
                     if ( check == 1 ) {
                       messages.channel.fetchMessages()
                          .then(function(list){
