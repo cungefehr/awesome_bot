@@ -194,7 +194,7 @@ client.on('message', function (messages){
                         if ( check == 1 ) {
                           console.log(messages.author.username + " - " + messages.author.id);
                           shcmd = shell.exec('systemctl status zomboid');
-                          shcmd = shcmd.splt(/\n\n/);
+                          shcmd = shcmd.split(/\n\n/);
                           console.log(shcmd);
                           //messages.reply(' ' + shcmd );
                         } else {
