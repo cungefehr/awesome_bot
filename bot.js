@@ -235,7 +235,7 @@ client.on('message', function (messages){
 
                 case 'clearChat':
                     check = roleCheck(messages,"AWE");
-                    echo cmd_option;
+                    console.log(cmd_option);
                     if ( check == 1 ) {
                       // message.channel.bulkDelete(amount, true)
                       //     .then((_message) => {
