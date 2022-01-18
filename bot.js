@@ -276,7 +276,7 @@ client.on('message', function (messages){
 }
 
 function systemctl(cmd,service) {
-  shcmd = shell.exec('systemctl ' +cmd +service );
+  shcmd = shell.exec('systemctl ' + cmd + ' ' +service );
 
   if ( cmd == 'status' ) {
     shcmd = shcmd.split(/\n\n/);
