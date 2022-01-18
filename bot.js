@@ -192,6 +192,7 @@ client.on('message', function (messages){
                 case 'zomboidstatus':
                         check = roleCheck(messages,"AWE");
                         if ( check == 1 ) {
+                          console.log(messages.author.username + " - " + messages.author.id);
                           systemctl('status','zomboid');
                           if ( shcmd == '' ) {
                             //
@@ -275,7 +276,6 @@ client.on('message', function (messages){
 }
 
 function systemctl(cmd,service) {
-  console.log(messages.author.username + " - " + messages.author.id);
   shcmd = shell.exec('systemctl ' +cmd +service );
 
   if ( cmd == 'status' ) {
