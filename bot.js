@@ -135,7 +135,7 @@ client.on('message', function (messages){
                           }
                       } else {
                           console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
-                          messages.reply('Rolecheck failed for User: " + messages.author.username });
+                          messages.reply('Rolecheck failed for User: ' + messages.author.username );
                       }
                 break;
 
