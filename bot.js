@@ -16,13 +16,21 @@ const client = new Client({
         Intents.FLAGS.GUILD_MESSAGES //gets messages from our bot.
     ]
 });
-
-const con = mysql.createConnection({
-   host: process.env.mysqlhost,
-   user: process.env.mysqluser,
-   database: process.env.mysqldatabase,
-   password: process.env.mysqlpassword
-});
+//
+// const con = mysql.createConnection({
+//    host: process.env.mysqlhost,
+//    user: process.env.mysqluser,
+//    database: process.env.mysqldatabase,
+//    password: process.env.mysqlpassword
+// });
+//
+// con.connect(function(err) {
+// if (err) throw err;
+//  console.log("Connected!");
+//      con.query("SELECT * FROM serverinfo WHERE name='" + cmd_option +"'", function (err, result, fields, serverinfo) {
+//        if (err) throw err;
+//        });
+//   });
 
 console.log(process.env.mysqlhost);
 
@@ -146,6 +154,53 @@ client.on('message', function (messages){
                         //shell.echo('Test erfolgreich');
                 break;
 
+                //Starbound
+                case 'zomboidstart':
+                  check = roleCheck(messages,"AWE");
+                  if ( check == 1 ) {
+                    console.log(messages.author.username + " - " + messages.author.id);
+                    shcmd = shell.exec('systemctl start zomboid');
+                    messages.reply(' ' + shcmd );
+                  } else {
+                    console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
+                    messages.reply('Rolecheck failed for User: ' + messages.author.username );
+                  }
+    	          break;
+
+                case 'zomboidstop':
+                  check = roleCheck(messages,"AWE");
+                  if ( check == 1 ) {
+                    console.log(messages.author.username + " - " + messages.author.id);
+                    shcmd = shell.exec('systemctl stop zomboid');
+                    messages.reply(' ' + shcmd );
+                  } else {
+                    console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
+                    messages.reply('Rolecheck failed for User: ' + messages.author.username );
+                  }
+                break;
+                case 'zomboidrestart':
+                        check = roleCheck(messages,"AWE");
+                        if ( check == 1 ) {
+                          console.log(messages.author.username + " - " + messages.author.id);
+                          shcmd = shell.exec('systemctl restart zomboid');
+                          messages.reply(' ' + shcmd );
+                        } else {
+                          console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
+                          messages.reply('Rolecheck failed for User: ' + messages.author.username );
+                        }
+                break;
+                case 'zomboidstatus':
+                        check = roleCheck(messages,"AWE");
+                        if ( check == 1 ) {
+                          console.log(messages.author.username + " - " + messages.author.id);
+                          shcmd = shell.exec('systemctl restart zomboid');
+                          messages.reply(' ' + shcmd );
+                        } else {
+                          console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
+                          messages.reply('Rolecheck failed for User: ' + messages.author.username );
+                        }
+                break;
+
                 case 'clearChat':
                     roleCheck(messages,"AWE");
                     if ( check == 1 ) {
@@ -160,9 +215,9 @@ client.on('message', function (messages){
     	          break;
 
                 // Get Server Info
-                case 'getInfo':
-                      serverInfo = getServerInfo(cmd_option);
-    	          break;
+                // case 'getInfo':
+                //       serverInfo = getServerInfo(cmd_option);
+    	          // break;
     	   // Just add any case commands if you want to..
              }
          }
@@ -215,41 +270,41 @@ client.on('message', function (messages){
       }
 }
 
- function getServerInfo(cmd_option) {
-       console.log(cmd_option);
-
-       var serverinfo = [];
-
-       con.connect(function(err) {
-       if (err) throw err;
-        console.log("Connected!");
-            con.query("SELECT * FROM serverinfo WHERE name='" + cmd_option +"'", function (err, result, fields, serverinfo) {
-              if (err) throw err;
-                console.log(result);
-                var serverinfo_rows = [ 'Servername: ' , 'Spielname: ' , 'Mods: ' , 'Maximale Spieleranzahl: ' , 'FQDN: ' , 'IP Adresse: ' , 'Port: ' , 'Server User: ' , 'Server User Password: '];
-                var tablespaces = [ 'name' , 'game_name' ,'max_player_count' , 'fqdn' , 'ipaddress' , 'port' , '']
-                serverinfo.forEach(function(item, index, array){
-                   console.log(item, index);
-
-                   messages.reply(serverinfo_rows[0] + result[0].name + "\n" + serverinfo_rows[1] + result[0].game_name + "\n" + serverinfo_rows[2] + result[0].mods + "\n" + serverinfo_rows[3] + result[0].max_player_count + "\n" +
-                       serverinfo_rows[4] + result[0].fqdn + "\n" + serverinfo_rows[5] + result[0].ipaddress + "\n" + serverinfo_rows[6] + result[0].port + "\n" + serverinfo_rows[7] + result[0].servermessages.author.username + "\n" + serverinfo_rows[8] + result[0].serveruserpassword);
-                 messages.reply('Servername: ' + result[0].name);
-                 messages.reply('Spielname: ' + result[0].game_name );
-                 messages.reply('Maximale Spieleranzahl: ' + result[0].max_player_count );
-                 messages.reply('FQDN: ' + result[0].fqdn );
-                 messages.reply('IP Adresse: ' + result[0].ipaddress );
-                 messages.reply('Port: ' + result[0].port );
-                 messages.reply('Server User: ' + result[0].serveruser );
-                 messages.reply('Server User Password: ' + result[0].serveruserpassword);
-
-              });
-
-           });
-
-         });
-
- 	    return 0;
-}
+//  function getServerInfo(cmd_option) {
+//        console.log(cmd_option);
+//
+//        var serverinfo = [];
+//
+//        con.connect(function(err) {
+//        if (err) throw err;
+//         console.log("Connected!");
+//             con.query("SELECT * FROM serverinfo WHERE name='" + cmd_option +"'", function (err, result, fields, serverinfo) {
+//               if (err) throw err;
+//                 console.log(result);
+//                 var serverinfo_rows = [ 'Servername: ' , 'Spielname: ' , 'Mods: ' , 'Maximale Spieleranzahl: ' , 'FQDN: ' , 'IP Adresse: ' , 'Port: ' , 'Server User: ' , 'Server User Password: '];
+//                 var tablespaces = [ 'name' , 'game_name' ,'max_player_count' , 'fqdn' , 'ipaddress' , 'port' , '']
+//                 serverinfo.forEach(function(item, index, array){
+//                    console.log(item, index);
+//
+//                    messages.reply(serverinfo_rows[0] + result[0].name + "\n" + serverinfo_rows[1] + result[0].game_name + "\n" + serverinfo_rows[2] + result[0].mods + "\n" + serverinfo_rows[3] + result[0].max_player_count + "\n" +
+//                        serverinfo_rows[4] + result[0].fqdn + "\n" + serverinfo_rows[5] + result[0].ipaddress + "\n" + serverinfo_rows[6] + result[0].port + "\n" + serverinfo_rows[7] + result[0].servermessages.author.username + "\n" + serverinfo_rows[8] + result[0].serveruserpassword);
+//                  messages.reply('Servername: ' + result[0].name);
+//                  messages.reply('Spielname: ' + result[0].game_name );
+//                  messages.reply('Maximale Spieleranzahl: ' + result[0].max_player_count );
+//                  messages.reply('FQDN: ' + result[0].fqdn );
+//                  messages.reply('IP Adresse: ' + result[0].ipaddress );
+//                  messages.reply('Port: ' + result[0].port );
+//                  messages.reply('Server User: ' + result[0].serveruser );
+//                  messages.reply('Server User Password: ' + result[0].serveruserpassword);
+//
+//               });
+//
+//            });
+//
+//          });
+//
+//  	    return 0;
+// }
 
 // Login to Discord with your client's token
 client.login(token);
