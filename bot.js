@@ -235,11 +235,20 @@ client.on('message', function (messages){
 
                 case 'clearChat':
                     check = roleCheck(messages,"AWE");
+                    echo cmd_option;
                     if ( check == 1 ) {
-                      messages.channel.fetchMessages()
-                         .then(function(list){
-                              message.channel.bulkDelete(list);
-                          }, function(err){message.channel.send("ERROR: ERROR CLEARING CHANNEL.")})
+                      // message.channel.bulkDelete(amount, true)
+                      //     .then((_message) => {
+                      //       message.channel
+                      //         // do you want to include the current message here?
+                      //         // if not it should be ${_message.size - 1}
+                      //         .send(`Bot cleared \`${_message.size}\` messages :broom:`)
+                      //         .then((sent) => {
+                      //           setTimeout(() => {
+                      //             sent.delete();
+                      //           }, 2500);
+                      //         });
+                      //     });
                     } else {
                         console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
                         messages.reply('Rolecheck failed for User: ' + messages.author.username );
