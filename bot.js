@@ -222,6 +222,23 @@ client.on('message', function (messages){
                           messages.reply('Rolecheck failed for User: ' + messages.author.username );
                         }
                 break;
+                case 'zomboid-update':
+                        check = roleCheck(messages,"AWE");
+                        if ( check == 1 ) {
+                          console.log(messages.author.username + " - " + messages.author.id);
+                          shcmd = shell.exec('zomboid.sh update');
+                          if ( shcmd == '' ) {
+                            //
+                            messages.reply('Zomboid Updated and Server started!');
+                          } else {
+                            messages.reply(' ' + shcmd );
+                          }
+
+                        } else {
+                          console.log(messages.author.username + " - " + messages.author.id + " Rolecheck failed!");
+                          messages.reply('Rolecheck failed for User: ' + messages.author.username );
+                        }
+                break;
                 case 'zomboid-status':
                           console.log(messages.author.username + " - " + messages.author.id);
                           systemctl('status','zomboid');
