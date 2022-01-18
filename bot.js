@@ -168,8 +168,8 @@ client.on('message', function (messages){
                         }
                 break;
 
-                //Starbound
-                case 'zomboidstart':
+                //Zomboid Start
+                case 'zomboid-start':
                   check = roleCheck(messages,"AWE");
                   if ( check == 1 ) {
                     console.log(messages.author.username + " - " + messages.author.id);
@@ -187,7 +187,7 @@ client.on('message', function (messages){
                   }
     	          break;
 
-                case 'zomboidstop':
+                case 'zomboid-stop':
                   check = roleCheck(messages,"AWE");
                   if ( check == 1 ) {
                     console.log(messages.author.username + " - " + messages.author.id);
@@ -204,7 +204,7 @@ client.on('message', function (messages){
                     messages.reply('Rolecheck failed for User: ' + messages.author.username );
                   }
                 break;
-                case 'zomboidrestart':
+                case 'zomboid-restart':
                         check = roleCheck(messages,"AWE");
                         if ( check == 1 ) {
                           console.log(messages.author.username + " - " + messages.author.id);
@@ -222,7 +222,7 @@ client.on('message', function (messages){
                           messages.reply('Rolecheck failed for User: ' + messages.author.username );
                         }
                 break;
-                case 'zomboidstatus':
+                case 'zomboid-status':
                           console.log(messages.author.username + " - " + messages.author.id);
                           systemctl('status','zomboid');
                           if ( shcmd == '' ) {
@@ -236,7 +236,7 @@ client.on('message', function (messages){
                 case 'clearChat':
                     roleCheck(messages,"AWE");
                     if ( check == 1 ) {
-                      message.channel.fetchMessages()
+                      messages.channel.fetchMessages()
                          .then(function(list){
                               message.channel.bulkDelete(list);
                           }, function(err){message.channel.send("ERROR: ERROR CLEARING CHANNEL.")})
